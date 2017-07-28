@@ -1,16 +1,13 @@
-
 var sw = require('stopword'),
-	fs = require('fs'),
 	request = require('request');
-const express = require('express');
-const app = express();
 
-app.get('/', function (req, res) {
-  res.send('Insert the poll ID in to the URL like this: localhost:3000/pollID</br></br>example: kbhiaYeDDHCIGXj');
-});
+var express = require('express');
+var router = express.Router();
 
-app.get('/:pollID', function (req, res) {  
-  	var pollID = req.params.pollID;
+/* GET home page. */
+router.get('/:pollID', function(req, res, next) {
+	var pollID = req.params.pollID;
+	// var pollID = 'kbhiaYeDDHCIGXj';
 
   	var options = {
 		url: 'https://www.polleverywhere.com/free_text_polls/' + pollID + '/results',
@@ -29,7 +26,7 @@ app.get('/:pollID', function (req, res) {
 	var dateTime = date+' '+time;
 	console.log(dateTime);
 
-  	function callback(error, response, body) {
+	function callback(error, response, body) {
 	  if (!error && response.statusCode == 200) {
 	    var info = JSON.parse(body);
 
@@ -56,16 +53,12 @@ app.get('/:pollID', function (req, res) {
 		// const newArray = sw.removeStopwords(oldString, sw.cu); // custom English stop words
 		const newString = newArray.join(' ');
 
-		res.send('<head><title>Jane Doe - ' + pollID + '</title></head><html><h3> PollID: ' + pollID + ' - ' + dateTime + '</h3>' + newString + '</html>');
+		// res.send('<head><title>Jane Doe - ' + pollID + '</title></head><html><h3> PollID: ' + pollID + ' - ' + dateTime + '</h3>' + newString + '</html>');
+		res.render('poll', { title: 'Jane Doe Text', pollID: pollID, dateTime: dateTime, text: newString });
 	  }
 	}
 	 
 	request(options, callback);
 });
 
-var port = process.env.PORT || 3000;
-
-app.listen(port, function () {
-  console.log('Example app listening on port 3000!');
-});
-
+module.exports = router;
