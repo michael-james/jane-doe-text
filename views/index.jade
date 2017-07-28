@@ -2,6 +2,9 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
-  p Insert the poll ID in to the URL like this: localhost:3000/pollID
-  p example: kbhiaYeDDHCIGXj
+  p Insert the poll ID in to the URL like this: jane-doe-text.herokuapp.com/
+    strong pollID
+  p The poll ID is the mix of numbers and letters at the end of the URL when you open a poll, such as https://www.polleverywhere.com/free_text_polls/
+    strong 8ZTrqVzH6Y3IblJ
+  p example: #[a(href="/kbhiaYeDDHCIGXj") kbhiaYeDDHCIGXj]
+  p example: #[a(href="/8ZTrqVzH6Y3IblJ") 8ZTrqVzH6Y3IblJ]

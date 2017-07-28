@@ -54,7 +54,7 @@ router.get('/:pollID', function(req, res, next) {
 		const newString = newArray.join(' ');
 
 		// res.send('<head><title>Jane Doe - ' + pollID + '</title></head><html><h3> PollID: ' + pollID + ' - ' + dateTime + '</h3>' + newString + '</html>');
-		res.render('poll', { title: 'Jane Doe Text', pollID: pollID, dateTime: dateTime, text: newString });
+		res.render('poll', { title: dateTime + ' - Jane Doe Text Submission', pollID: pollID, dateTime: dateTime, text: newString });
 	  }
 	}
 	 
