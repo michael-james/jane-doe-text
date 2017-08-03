@@ -31,12 +31,14 @@ router.get('/:pollID', function(req, res, next) {
 	    var info = JSON.parse(body);
 
 	    var text = "";
+	    var txts = [ ];
 
 	    for(var attributename in info){
 	    	
 	    	for(var key in info[attributename]){
 	    		if (key == "value") {
 	    			text += (info[attributename][key] + " ");
+	    			txts.push(info[attributename][key]);
 	    		}
 	    	}
 		}
@@ -54,7 +56,7 @@ router.get('/:pollID', function(req, res, next) {
 		const newString = newArray.join(' ');
 
 		// res.send('<head><title>Jane Doe - ' + pollID + '</title></head><html><h3> PollID: ' + pollID + ' - ' + dateTime + '</h3>' + newString + '</html>');
-		res.render('poll', { title: dateTime + ' - Jane Doe Text Submission', pollID: pollID, dateTime: dateTime, text: newString });
+		res.render('poll', { title: dateTime + ' - Jane Doe Text Submission', pollID: pollID, dateTime: dateTime, text: newString, txts: txts });
 	  }
 	}
 	 

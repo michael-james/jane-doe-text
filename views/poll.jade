@@ -1,6 +1,18 @@
-extends layout
+extends index
 
 block content
+  p #[a(href="/") Jane Doe Text Home]
+  p Insert the poll ID into the URL like this: jane-doe-text.herokuapp.com/
+    strong pollID
+  p 
   h1 Poll: #{pollID}
-  h2= dateTime
+  h2 As of #{dateTime}
+  h3 cleaned up (for #[a(href="http://www.wordclouds.com") word cloud])
   p= text
+
+  h3 raw (for #[a(href="http://www.textexture.com") textexture])
+  table
+    tbody
+      for txt in txts
+        tr
+          td #{txt}
